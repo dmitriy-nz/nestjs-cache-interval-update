@@ -2,6 +2,7 @@
   "name": "nestjs-cache-interval-update",
   "version": "1.0.0",
   "description": "",
+  "rootDir": "./dist",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
