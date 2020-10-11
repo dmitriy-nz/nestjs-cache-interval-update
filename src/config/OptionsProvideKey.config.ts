@@ -1,0 +1,1 @@
+export const OPTIONS_PROVIDE_KEY = "__IntervalCacheUpdateModuleOptions__";

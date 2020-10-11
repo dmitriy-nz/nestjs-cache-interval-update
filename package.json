@@ -1,0 +1,35 @@
+{
+  "name": "nestjs-cache-interval-update",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run clean && npm run build",
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitriy-nz/nestjs-cache-interval-update.git"
+  },
+  "author": "Dmitriy Nazarenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmitriy-nz/nestjs-cache-interval-update/issues"
+  },
+  "homepage": "https://github.com/dmitriy-nz/nestjs-cache-interval-update#readme",
+  "devDependencies": {
+    "@nestjs/common": "^7.4.4",
+    "@nestjs/core": "^7.4.4",
+    "@types/cache-manager": "^2.10.3",
+    "@types/node": "^14.11.8",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "cache-manager": "^3.4.0",
+    "reflect-metadata": "^0.1.13"
+  }
+}
