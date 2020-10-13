@@ -26,7 +26,7 @@ export class CacheIntervalUpdateService implements OnModuleInit {
               private modulesContainer: ModulesContainer,
               @Inject(OPTIONS_PROVIDE_KEY)
               private cacheManagerConfig: StoreConfig & CacheOptions) {
-    const config = Object.create(cacheManagerConfig);
+    const config = Object.assign({}, cacheManagerConfig);
     config.ttl = 0;
     this.cacheStorage = CacheManager.caching(config);
   }
