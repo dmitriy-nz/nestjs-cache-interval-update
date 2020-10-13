@@ -6,6 +6,7 @@ import { CACHE_INTERVAL_FORCE_TOKEN } from '../decorators/CacheIntervalForceUpda
 import * as CacheManager from 'cache-manager';
 import { Cache, CacheOptions, StoreConfig } from 'cache-manager';
 import { OPTIONS_PROVIDE_KEY } from '../config/OptionsProvideKey.config';
+import { PATH_METADATA } from '@nestjs/common/constants';
 
 interface PeriodRefreshItem {
   key: string;
@@ -111,10 +112,14 @@ export class CacheIntervalUpdateService implements OnModuleInit {
 
     const config: CacheIntervalUpdateConfig = Reflect.getMetadata(CACHE_INTERVAL_TOKEN, targetCallback);
     const forceUpdateCache: boolean = Reflect.getMetadata(CACHE_INTERVAL_FORCE_TOKEN, targetCallback);
+    const isRequestMapping: boolean = !!Reflect.getMetadata(PATH_METADATA, targetCallback);
 
     if (config == null) {
       return null;
     }
+
+    const methodDescriptor = Object.getOwnPropertyDescriptor(instancePrototype, methodKey);
+
 
     const periodRefreshItem: PeriodRefreshItem = {
       key: config.key,
@@ -125,9 +130,15 @@ export class CacheIntervalUpdateService implements OnModuleInit {
       forceUpdateCache,
     };
 
-    instancePrototype[methodKey] = async () => {
-      return await this.getValueByKey(periodRefreshItem.key);
-    };
+
+    if (!isRequestMapping) {
+      methodDescriptor.value = async () => {
+        // this.logger.debug(`Return from cache ${methodKey}`);
+        return await this.getValueByKey(periodRefreshItem.key);
+      };
+
+      Object.defineProperty(instancePrototype, methodKey, methodDescriptor);
+    }
 
     return periodRefreshItem;
   }

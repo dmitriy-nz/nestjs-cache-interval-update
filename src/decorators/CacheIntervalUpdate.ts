@@ -1,4 +1,5 @@
-import { SetMetadata } from '@nestjs/common';
+import { SetMetadata, UseInterceptors } from '@nestjs/common';
+import { IntervalUpdateCacheInterceptor } from '../interceptors/IntervalUpdateCache.interceptor';
 
 export const CACHE_INTERVAL_TOKEN = `CACHE_INTERVAL_TOKEN`;
 
@@ -18,6 +19,8 @@ export function CacheIntervalUpdate(perSeconds: number, customCacheKey?: string)
     };
 
     SetMetadata(CACHE_INTERVAL_TOKEN, config)(target, method, descriptor);
+    UseInterceptors(IntervalUpdateCacheInterceptor)(target, method, descriptor);
+
     return descriptor;
   };
 }
