@@ -1,3 +1,4 @@
 export * from "./decorators/CacheIntervalForceUpdate"
 export * from "./decorators/CacheIntervalUpdate"
-export * from "./interval-cache-update.module";
+export * from "./config/UpdatePeriods"
+export * from "./interval-cache-update.module"

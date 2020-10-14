@@ -1,6 +1,11 @@
 import {StoreConfig} from "cache-manager";
 
-export const DefaultCacheConfig: StoreConfig = {
+export interface IntervalCacheUpdateConfig extends StoreConfig {
+    disable: boolean;
+}
+
+export const DefaultCacheConfig: IntervalCacheUpdateConfig = {
+    disable: false,
     store: 'memory',
     ttl: 0,
 }
